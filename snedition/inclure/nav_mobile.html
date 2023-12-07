@@ -1,0 +1,14 @@
+<B_nav>
+[(#SET{ico_mode,#CONFIG{sn_icones_cle}|strlen|>{0}})]
+<nav id="sn-nav-mobile-section" class="nav sn-nav sn-section sn-section-nav-mobile clearfix" role="navigation">
+	<div class="sn-brique">
+		<button class="sn-btn sn-btn-action sn-nav-mobile-btn[ (#GET{ico_mode}|oui)sn-btn-ico]" title="Menu">[(#CONFIG{sn_icones_cle}|strlen|>{0}|?{<span class="fas fa-bars"></span>,<:snedition:sn_menu_mobile_texte:>})]</button>
+	</div>
+	<ul class="sn-nav-mobile">
+		<BOUCLE_nav(RUBRIQUES) {racine} {tout} {sn_menu==menuppl} {lang} {par num titre, titre}>
+		<li class="nav-item sn-nav-mobile-item[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]"><a class="sn-btn snbn1" href="#URL_RUBRIQUE">#TITRE</a></li>
+		</BOUCLE_nav>
+	</ul>
+</nav>
+</B_nav>
+<!-- SN Edition - inclure/nav_mobile -->

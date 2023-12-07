@@ -1,0 +1,29 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_bloc','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_bloc','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-sn-bloc-24.png}"><:snedition:generer_bloc_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}' id='formulaire_generer_bloc'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+        <fieldset>
+        [(#SAISIE{'selection', bloc_titre_niveau, label=<:snedition:generer_bloc_titre_niveau:>, defaut=#ENV**{bloc_titre_niveau}, data=#ENV**{liste_niveaux}, cacher_option_intro=oui})]
+        [(#SAISIE{'input', bloc_titre_texte, label=<:snedition:generer_bloc_titre_texte:>, defaut=#ENV**{bloc_titre_texte}, maxlength=256})]
+        [(#SAISIE{'input', bloc_colonnes, label=<:snedition:generer_bloc_colonnes:>, defaut=#ENV**{bloc_colonnes}})]
+        [(#SAISIE{'oui_non', bloc_acc, label=<:snedition:generer_bloc_acc:>, defaut=#ENV**{bloc_acc}})]
+        [(#SAISIE{'oui_non', bloc_plie, label=<:snedition:generer_bloc_plie:>, defaut=#ENV**{bloc_plie}})]
+        [(#SAISIE{'selection', bloc_style, label=<:snedition:generer_bloc_style:>, defaut=#ENV**{bloc_style}, data=#ENV**{liste_bloc_styles}})]
+        [(#SAISIE{'input', bloc_classe, label=<:snedition:generer_bloc_classe:>, defaut=#ENV**{bloc_classe}, maxlength=256})]
+        </fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snedition:generer_bloc_valider:>' /></p>
+    </div></form>
+    ]
+</div>
+<!-- SN Edition - formulaires/generer_bloc -->

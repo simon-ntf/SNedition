@@ -1,0 +1,36 @@
+<B_nav>
+<nav class="nav sn-nav sn-nav-mega sn-section clearfix" id="nav" role="navigation">
+	<ul class="sn-brique">
+		<BOUCLE_nav(RUBRIQUES) {racine} {tout} {sn_menu==menuppl} {par num titre, titre}>
+		<li class="nav-item[ (#EXPOSE)][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]"><a class="sn-btn snbn1" href="#URL_RUBRIQUE"[ name="(#COMPTEUR_BOUCLE)"]>#TITRE</a></li>
+		</BOUCLE_nav>
+	</ul>
+   <B_nav_sous>
+   <ul class="sn-nav-mega-items clearfix[ (#TOTAL_BOUCLE|=={1}|oui)none]">
+	<BOUCLE_nav_sous(RUBRIQUES) {racine} {tout} {sn_menu==menuppl} {par num titre, titre}>
+   	<B_nav_sous_2>
+			<li class="nav-item[ (#EXPOSE)][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]"[ name="(#_nav_sous:COMPTEUR_BOUCLE)"]>
+            <div class="sn-nav-mega-bloc">
+                <a class="sn-nav-mega-lien" href="#URL_RUBRIQUE"><span class="sn-nav-mega-titre">#TITRE</span></a>
+                [<a class="sn-nav-mega-lien sn-img-lien" href="#URL_RUBRIQUE">(#ID_DOCUMENT|>{0}|oui)#MODELE{snvmg,id_document,snv_format=car,class=sn-nav-mega-img,alt=thumb,env}</a>]
+                [<div class="sn-nav-mega-intro">(#DESCRIPTIF|textebrut|couper{128})</div>]
+            </div>
+            <ul class="sn-nav-mega-sous-menu">
+            <BOUCLE_nav_sous_2(RUBRIQUES) {tout} {id_parent=#ID_RUBRIQUE} {par num titre, titre}>
+                <li>
+                    <a class="sn-btn sn-nav-mega-sous-lien" href="#URL_RUBRIQUE">#TITRE</a>
+                </li>
+            </BOUCLE_nav_sous_2>
+            </ul>
+            [(#CONFIG{sn_menu_mega_actu}|=={on}|oui)
+            <div class="sn-nav-mega-bloc">
+                <INCLURE{fond=inclure/sn_recents, env} {id_rubrique} {age=365} {limite=1} {flux_affichage=liste} {opt=#ARRAY{idref,mega-recents-#ID_RUBRIQUE,aff_etiquette,non,aff_chapo,non,bloc_titre,<:snedition:sn_recents_rubrique_titre:>,classe,sn-mega-actus,niveau_de_titre_html,small}} />
+            </div>]
+        </li>
+   	</B_nav_sous_2>
+	</BOUCLE_nav_sous>
+	</ul>
+   </B_nav_sous>
+</nav>
+</B_nav>
+<!-- SN Edition - inclure/nav_mega -->

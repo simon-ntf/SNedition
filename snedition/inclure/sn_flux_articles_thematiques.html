@@ -1,0 +1,42 @@
+#SET{id_groupemot,0}
+[(#CONFIG{sn_page_actus_themes_groupe}|intval|>{0}|oui)#SET{id_groupemot,#CONFIG{sn_page_actus_themes_groupe}}]
+[(#ENV{fsecteurs}|oui|?{#SET{fsecteurs,#ENV{fsecteurs}|sn_filtrage_transtyper},#SET{fsecteurs,#LANG|sn_lister_id_secteurs1}})]
+[(#SET{tous_fthemes,#LANG|sn_lister_id_mots_themes})]
+[(#ENV{fthemes}|oui|?{#SET{fthemes,#ENV{fthemes}|sn_filtrage_transtyper},#SET{fthemes,#GET{tous_fthemes}}})]
+#SET{classe_css_bouton,sn-btn-fitre-inactif}
+<div class="sn-brique sn-bloc-flux sn-bloc-flux-filtrer">
+#SET{classe_css_bouton,sn-btn-fitre-inactif}
+<B_filtretheme>
+<p><span class="sn-nav-titre"><:snedition:action_filtrer_theme_titre:></span><nav class="sn-nav sn-nav-actions sn-nav-filtrer">
+<BOUCLE_filtretheme(MOTS) {id_groupe==#GET{id_groupemot}} {par num titre, titre}>
+	[(#SET{classe_css_bouton,#ID_MOT|in_array{#GET{fthemes}}|?{sn-btn-o sn-btn-o-on,sn-btn-o}})]
+	[(#GET{fthemes}|count|=={#TOTAL_BOUCLE}|oui) #SET{classe_css_bouton,sn-btn-o}]
+	<a class="ajax sn-btn[ (#GET{classe_css_bouton})][ (#GET{ico_mode}|oui)sn-btn-ico]" href="[(#SELF|parametre_url{fthemes,i#ID_MOT})]">
+		[(#CONFIG{sn_icones_cle}|strlen|>{0}|oui)<span class="fa-solid fa-tag"></span>] #TITRE
+	</a>
+</BOUCLE_filtretheme>
+[(#GET{fthemes}|count|=={#TOTAL_BOUCLE}|non)
+	<a class="ajax sn-btn sn-btn-o[ (#GET{ico_mode}|oui)sn-btn-ico]" href="[(#SELF|parametre_url{fthemes,#LANG|sn_lister_id_mots_themes|sn_filtrage_transtyper_array})]">
+		[(#CONFIG{sn_icones_cle}|strlen|>{0}|?{<span class="fa-solid fa-delete-left"></span>,<:snedition:action_filtrer_supprimer_filtres:>})]
+	</a>
+]
+</nav></p></B_filtretheme>
+</div>
+<B_articles>
+<div class="sn-bloc sn-bloc-flux sn-bloc-flux-articles">
+	#ANCRE_PAGINATION
+	<nav class="sn-nav sn-nav-articles [(#CONFIG{sn_page_actus_affichage}|=={grille}|oui)sn-grl sn-grl-marge-m sn-grl9]">
+		<BOUCLE_articles(ARTICLES) {!par date} {pagination} {id_mot in #GET{fthemes}}>
+		<div dir="#LANG_DIR" class="hentry clearfix">
+			[(#ID_DOCUMENT|oui)#MODELE{snvmg,id_document,snv_format=car,classe=sn-flux-vignette,lien=#URL_ARTICLE,lien_class=sn-img-lien,env}]
+			<BOUCLE_rubriques(RUBRIQUES){id_rubrique}><small><a class="sn-recent-label-rubrique" href="#URL_RUBRIQUE">#TITRE</a></small></BOUCLE_rubriques>
+			<h3 class="h2 entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+			<small><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+			[<div class="#EDIT{intro} introduction entry-content">(#CHAPO|textebrut|couper{160})</div>]
+		</div>
+		</BOUCLE_articles>
+	</nav>
+	[<nav role="navigation" class="p pagination">(#PAGINATION{precedent_suivant})</nav>]
+</div><!--#articles_recents-->
+</B_articles>
+<!-- SN Edition - inclure/sn_flux_articles_thematiques -->

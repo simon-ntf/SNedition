@@ -1,0 +1,25 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class="formulaire_spip">
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_video','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_video','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-fa-youtube.svg}"><:snedition:generer_video_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}' id='formulaire_generer_bloc'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+        <fieldset>
+        [(#SAISIE{'input', video_source, label=<:snedition:generer_video_source:>, defaut=#ENV{video_source}, maxlength=256})]
+        [(#SAISIE{'input', video_largeur, label=<:snedition:generer_video_largeur:>, defaut=#ENV{video_largeur}, maxlength=4})]
+        [(#SAISIE{'input', video_hauteur, label=<:snedition:generer_video_hauteur:>, defaut=#ENV{video_hauteur}, maxlength=4})]
+        </fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snedition:generer_video_valider:>' /></p>
+    </div></form>
+    ]
+</div>
+<!-- SN Edition - formulaires/generer_video-->

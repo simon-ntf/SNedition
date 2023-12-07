@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+/***************************************************************************
+ *  SN Suite, suite de plugins pour SPIP                                   *
+ *  Copyright © depuis 2014                                                *
+ *  Simon Nataf                                                            *
+****************************************************************************
+ * SPIP SN Edition prive / style.css                                        *
+/***************************************************************************/
+
+/* --------------------------------------------------------------
+
+  objet_edit
+
+-------------------------------------------------------------- */
+#sn_aside_droite_contenu, #sn_aside_gauche_contenu{ height: 4rem; }
+
+/* --------------------------------------------------------------
+
+  Boutons
+
+-------------------------------------------------------------- */
+a.sn-btn{ background-color: #c41558; color: #fff;}
+.sn-pos-on{ background-color: purple; border: 1px solid purple; color: #fff; }
+.sn-positionner .sn-btn{ margin-bottom: 4px; width: 104px; }
+
+/* --------------------------------------------------------------
+
+  Elements generaux
+
+-------------------------------------------------------------- */
+.sn-prive-cacher{ display: none; }
+.sn-prive-exergue{ background-color: rgba(99,99,255,0.1); }
+p.sn-prive-demarge{ margin-bottom:0; }
+.sn-prive-nav-liens a{ margin-right: 8px; font-weight: bold; text-decoration: underline; }
+
+/* --------------------------------------------------------------
+
+  Colonne gauche
+
+-------------------------------------------------------------- */
+.sncolonne-gauche{ font-size: .8em; margin-top: 2rem; }
+.sncolonne-gauche .formulaire_spip{  }
+.sncolonne-gauche .formulaire_spip form{  }
+.sncolonne-gauche .formulaire_spip .titrem{ max-width: 180px; min-height:48px; border: none; }
+.sn-marge-28{ margin-top: 28px; }
+.sncolonne-gauche .formulaire_spip select{ max-width: 180px; }
+.sncolonne-gauche .sncolonne-gauche-titre{ margin-bottom: 4px; }
+.sncolonne-gauche .sncolonne-gauche-explication{ line-height: 1.2em; color: #555; }
+.sncolonne-gauche .sncolonne-gauche-affichage-btn{ float:right; margin-top: 4px; margin-right: 4px; }
+.sncolonne-gauche .sncolonne-code-genere{ display: block; padding: 4px; margin: 4px 0 4px 0; font-weight: bold; word-break: break-all; border: 1px solid rgb(199,169,169); background-color:rgb(248,228,228); color: #335; border-radius: 2px; }
+/* Boutons colonne gauche */
+a.sn-prive-btn{ display: block; float:right; margin-top: 4px; margin-right: 4px; min-width: 32px; min-height:32px; padding: 4px; border-radius: 3px; text-align: center; }
+a.sn-prive-btn:hover{ text-decoration: none; color: #c41558; text-shadow: 1px 1px rgba(23, 2, 8, .5); }
+a.sn-prive-btn-plus{ font-size: 1.5em; font-weight: bold; }
+/* Sections explications formulaires */
+.sn-prive-txt-mini{ font-size: .8em; }
+.sn-prive-avertissement { background-color: rgba(255,155,155,.5); border-radius: 8px; padding: 8px; }
+.sn-prive-avertissement-cool{ background-color: rgba(230,239,194,.5); border-radius: 8px; padding: 8px; }
+.sn-prive-padding-16{ padding: 16px; }
+
+/* --------------------------------------------------------------
+
+  end
+
+-------------------------------------------------------------- */

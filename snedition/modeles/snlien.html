@@ -1,0 +1,16 @@
+[(#SET{ll,#ENV{l}|sn_lien_analyser{#ENV{t}}})]
+#SET{lll,#GET{ll/url}}
+#SET{externe,#GET{ll/externe}}
+#SET{titre,#GET{ll/titre}}
+[(#REM)
+
+	Parametres :
+	- a ancre
+	- b style bouton standard oui ou non
+	- c complement de classe CSS
+	- l URL externe ou raccourci SPIP art12 rub777
+	- t texte de lien si l est un raccourci SPIP et t vide affiche le titre de la page
+
+]
+<a href="[(#GET{lll})][#(#ENV{a})]" class="sn-lien[ (#ENV{b}|=={oui}|oui)sn-btn sn-ubtn][(#ENV{b}|=={oui}|non)[ (#GET{externe}|=={oui}|?{spip_out,spip_in})]][ (#ENV{c})]"[ (#GET{externe}|=={oui}|oui)rel="external"]>[(#GET{titre})]</a>
+<!-- SN Edition - modeles/snlien -->

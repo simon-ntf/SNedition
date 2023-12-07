@@ -1,0 +1,28 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_geoloc','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_geoloc','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-fa-map-location-dot-solid.svg}"><:snedition:generer_geoloc_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}' id='formulaire_generer_geoloc'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+        <fieldset>
+        [(#SAISIE{'input', geoloc_lat, label=<:snedition:generer_geoloc_lat:>, defaut=#ENV{geoloc_lat}, maxlength=32})]
+        [(#SAISIE{'input', geoloc_lon, label=<:snedition:generer_geoloc_lon:>, defaut=#ENV{geoloc_lon}, maxlength=32})]
+        [(#SAISIE{'selection', geoloc_format, label=<:snedition:generer_geoloc_format:>, defaut=#ENV{geoloc_format}, datas=#ENV{liste_geoloc_formats}, cacher_option_intro=oui})]
+        [(#SAISIE{'selection', geoloc_marqueur, label=<:snedition:generer_geoloc_marqueur:>, defaut=#ENV{geoloc_marqueur}, datas=#ENV{liste_geoloc_marqueurs_styles}, cacher_option_intro=oui})]
+        [(#SAISIE{'input', geoloc_texte, label=<:snedition:generer_geoloc_texte:>, defaut=#ENV{geoloc_texte}, maxlength=256})]
+        [(#SAISIE{'input', geoloc_zoom, label=<:snedition:generer_geoloc_zoom:>, defaut=#ENV{geoloc_zoom}, maxlength=2})]
+        </fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snedition:generer_geoloc_valider:>' /></p>
+    </div></form>
+    ]
+</div>
+<!-- SN Edition - formulaires/generer_geoloc -->

@@ -1,0 +1,16 @@
+[(#AUTORISER{configurer,_sneditionconfig}|sinon_interdire_acces)]
+<h1 class="grostitre"><:snedition:titre_config_snedition:></h1>
+<div class='ajax'>
+	#FORMULAIRE_CONFIGURER_SNEDITION
+</div>
+[(#PLUGIN{snpushs}|oui)
+<div class='ajax'>
+	#FORMULAIRE_CONFIGURER_SNPUSHS
+</div>
+]
+[(#PLUGIN{snabonnements}|oui)
+<div class='ajax'>
+	#FORMULAIRE_CONFIGURER_SNABONNEMENTS
+</div>
+]
+<!-- SN Edition - prive/squelettes/contenu/configurer_snedition -->

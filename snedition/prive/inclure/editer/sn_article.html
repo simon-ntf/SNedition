@@ -1,0 +1,77 @@
+[(#CONFIG{sn_evt_activer}|=={on}|oui)
+<fieldset>
+	<h4><:snedition:edit_evt_section:> <a class="sn-prive-btn sn-prive-btn-plus" id="aff-champs-evt" href="#" >+</a>
+	<a class="sn-prive-btn sn-prive-btn-plus" id="aff-champs-evt-non" href="#" >-</a></h4>
+	<script type="text/javascript">
+	if (window.jQuery){
+		jQuery(document).ready(function(){
+			$('#aff-champs-evt').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				sn_EditChampsEvtAfficher();
+			});
+			$('#aff-champs-evt-non').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				sn_EditChampsEvtAfficher(true);
+			});
+			$('#aff-champs-evt-non').css('display','none');
+			function sn_EditChampsEvtAfficher(inverser){
+				if(inverser){
+					$('#aff-champs-evt').css('display','block');
+					$('#aff-champs-evt-non').css('display','none');
+					$('#sn-champs-evt').attr('class','sn-prive-exergue sn-prive-cacher sn-champs-evt');
+				} else {
+					$('#aff-champs-evt-non').css('display','block');
+					$('#aff-champs-evt').css('display','none');
+					$('#sn-champs-evt').attr('class','sn-prive-exergue sn-champs-evt');
+				}
+			}
+		});
+	}
+</script>
+</fieldset>
+<fieldset class="sn-prive-exergue sn-prive-cacher sn-champs-evt" id="sn-champs-evt">
+	[(#SAISIE{input, evt_lieu, label=<:snedition:edit_evt_lieu:>, defaut=#ENV**{evt_lieu}, maxlength=244})]
+	[(#SAISIE{date, evt_debut, label=<:snedition:edit_evt_debut:>, defaut=[(#ENV**{evt_debut}|vider_date)], horaire=oui, class="dateheure"})]
+	[(#SAISIE{date, evt_fin, label=<:snedition:edit_evt_fin:>, defaut=[(#ENV**{evt_fin}|vider_date)], horaire=oui, class="dateheure"})]
+	[(#SAISIE{date, evt_inscr, label=<:snedition:edit_evt_inscr:>, defaut=[(#ENV**{evt_inscr}|vider_date)], horaire=oui, class="dateheure"})]
+	[(#SAISIE{date, evt_inscr_fin, label=<:snedition:edit_evt_inscr_fin:>, defaut=[(#ENV**{evt_inscr_fin}|vider_date)], horaire=oui, class="dateheure"})]
+	[(#SAISIE{textarea, evt_inscr_texte, label=<:snedition:edit_evt_inscr_texte:>, defaut=#ENV**{evt_inscr_texte}, rows=4})]
+</fieldset>
+<fieldset><h4><:snedition:edit_metas_section:> <a class="sn-prive-btn sn-prive-btn-plus" id="aff-champs-metas" href="#" >+</a>
+	<a class="sn-prive-btn sn-prive-btn-plus" id="aff-champs-metas-non" href="#" >-</a></h4>
+	<script type="text/javascript">
+	if (window.jQuery){	jQuery(document).ready(function(){
+		$('#aff-champs-metas').on('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			sn_EditChampsMetasAfficher();
+		});
+		$('#aff-champs-metas-non').on('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			sn_EditChampsMetasAfficher(true);
+		});
+		$('#aff-champs-metas-non').css('display','none');
+		function sn_EditChampsMetasAfficher(inverser){
+			if(inverser){
+				$('#aff-champs-metas').css('display','block');
+				$('#aff-champs-metas-non').css('display','none');
+				$('#sn-champs-metas').attr('class','sn-prive-exergue sn-prive-cacher sn-champs-metas');
+			} else {
+				$('#aff-champs-metas-non').css('display','block');
+				$('#aff-champs-metas').css('display','none');
+				$('#sn-champs-metas').attr('class','sn-prive-exergue sn-champs-metas');
+			}
+		}
+	}); }
+</script>
+</fieldset>
+<fieldset class="sn-prive-exergue sn-prive-cacher sn-champs-metas" id="sn-champs-metas">
+	[(#SAISIE{oui_non, meta_nocache, label=<:snedition:edit_meta_nocache:>, explication=<:snedition:edit_meta_nocache_explication:>, defaut=#ENV**{meta_nocache}})]
+	[(#SAISIE{input, meta_redirection, label=<:snedition:edit_meta_redirection:>, explication=<:snedition:edit_meta_redirection_explication:>, defaut=#ENV**{meta_redirection}})]
+	[(#SAISIE{input, meta_motsclefs, label=<:snedition:edit_meta_motsclefs:>, explication=<:snedition:edit_meta_motsclefs_explication:>, defaut=#ENV**{meta_motsclefs}})]
+</fieldset>
+]
+<!-- SN Edition - prive/inclure/editer/sn_article -->

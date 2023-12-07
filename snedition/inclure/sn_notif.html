@@ -1,0 +1,9 @@
+[(#ENV{sn_notif}|oui)
+<div class="sn-section sn-notif-section">
+	<div class="sn-brique sn-notif-brique">
+		<div class="sn-notif-message">
+			<:snedition:opt_notification_{=#ENV{sn_notif}}:>
+		</div>
+		<div class="sn-btn-notif-fermer"><a href="[(#SELF|parametre_url{sn_notif,''})]" rel="nofollow" class="sn-btn[ (#CONFIG{sn_icones_cle}|strlen|>{0}|oui)sn-btn-ico]">[(#CONFIG{sn_icones_cle}|strlen|>{0}|?{<span class="fas fa-xmark"></span>,<:snedition:action_notif_fermer:>})]</a></div>
+	</div>
+</div>]

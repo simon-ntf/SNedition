@@ -1,0 +1,46 @@
+[(#ID_RUBRIQUE|sinon_interdire_acces)]
+[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|sinon_interdire_acces)]
+[(#CONFIG{sn_menu_sec_activer}|=={on}|oui)
+#SET{label,rubrique_menu}
+[(#SET{rubrique_menus,#GET{label}|sn_const_options_trads{S,snedition}})]
+#SET{opt_disable,oui}
+[(#ENV**{profondeur}|=={0}|oui)#SET{opt_disable,non}]
+[(#SAISIE{selection, sn_menu, label=<:snedition:edit_sn_menu:>, defaut=#ENV**{sn_menu}|sinon{horsmenu}, data=#GET{rubrique_menus}, disable=#GET{opt_disable}, explication=<:snedition:edit_sn_menu_explication:>, cacher_option_intro=oui})]
+<p class="snimages-prive-explication"><:snedition:edit_sn_menu_explication_sec:></p>]
+<fieldset><h4><:snedition:edit_metas_section:> <a class="sn-prive-btn sn-prive-btn-plus" id="aff-champs-metas" href="#" >+</a>
+	<a class="sn-prive-btn sn-prive-btn-plus" id="aff-champs-metas-non" href="#" >-</a></h4>
+	<script type="text/javascript">
+	if (window.jQuery){
+		jQuery(document).ready(function(){
+			$('#aff-champs-metas').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				sn_EditChampsMetasAfficher();
+			});
+			$('#aff-champs-metas-non').on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				sn_EditChampsMetasAfficher(true);
+			});
+			$('#aff-champs-metas-non').css('display','none');
+			function sn_EditChampsMetasAfficher(inverser){
+				if(inverser){
+					$('#aff-champs-metas').css('display','block');
+					$('#aff-champs-metas-non').css('display','none');
+					$('.sn-champs-metas').attr('class','sn-prive-exergue sn-prive-cacher sn-champs-metas');
+				} else {
+					$('#aff-champs-metas-non').css('display','block');
+					$('#aff-champs-metas').css('display','none');
+					$('.sn-champs-metas').attr('class','sn-prive-exergue sn-champs-metas');
+				}
+			}
+		});
+	}
+</script>
+</fieldset>
+<fieldset class="sn-prive-exergue sn-prive-cacher sn-champs-metas" id="sn-champs-metas">
+	[(#SAISIE{oui_non, meta_nocache, label=<:snedition:edit_meta_nocache:>, explication=<:snedition:edit_meta_nocache_explication:>, defaut=#ENV**{meta_nocache}})]
+	[(#SAISIE{input, meta_redirection, label=<:snedition:edit_meta_redirection:>, explication=<:snedition:edit_meta_redirection_explication:>, defaut=#ENV**{meta_redirection}})]
+	[(#SAISIE{input, meta_motsclefs, label=<:snedition:edit_meta_motsclefs:>, explication=<:snedition:edit_meta_motsclefs_explication:>, defaut=#ENV**{meta_motsclefs}})]
+</fieldset>
+<!-- SN Edition - prive/inclure/editer/sn_rubrique -->

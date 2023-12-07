@@ -1,0 +1,27 @@
+[(#SET{ico_mode,#CONFIG{sn_icones_cle}|strlen|>{0}})]
+[(#SET{sn_mode_couleur,#ENV{sn_mode_couleur}|sinon{#CONST{_SN_MODE_COULEUR_DEFAUT}}})]
+[(#SET{sn_mc_legende,#ENV{sn_mode_couleur}|=={sombre}|oui|?{<:snedition:action_mode_couleur_lumineux_legende:>,<:snedition:action_mode_couleur_sombre_legende:>}})]
+[(#SET{sn_mode_couleur_inverse,#ENV{sn_mode_couleur}|=={sombre}|oui|?{lumineux,sombre}})]
+<nav class="sn-nav sn-nav-actions sn-nav-service" id="sn-nav-service" role="navigation">
+	<ul>
+	[(#CONST{_SN_MODE_TYPO_ACTIF}|oui)
+		<li class="sn-nav-service-mode-fonte100"><a href="[(#SELF|parametre_url{sn_mode_typo,100})]" title="<:snedition:action_typo_100:>" rel="nofollow" class="sn-btn sn-btn-a[ (#GET{ico_mode}|oui)sn-btn-ico]">
+				[(#GET{ico_mode}|?{<span class="fas fa-font"></span>,100%})]
+		</a></li>
+		<li class="sn-nav-service-mode-fonte150"><a href="[(#SELF|parametre_url{sn_mode_typo,150})]" title="<:snedition:action_typo_150:>" rel="nofollow" class="sn-btn sn-btn-a[ (#GET{ico_mode}|oui)sn-btn-ico]">
+				[(#GET{ico_mode}|?{<span class="fas fa-font"></span>,150%})]
+		</a></li>
+		<li class="sn-nav-service-mode-fonte200"><a href="[(#SELF|parametre_url{sn_mode_typo,200})]" title="<:snedition:action_typo_200:>" rel="nofollow" class="sn-btn sn-btn-a[ (#GET{ico_mode}|oui)sn-btn-ico]">
+				[(#GET{ico_mode}|?{<span class="fas fa-font"></span>,200%})]
+		</a></li>
+	]
+	[(#CONST{_SN_MODE_COULEUR_ACTIF}|oui)
+		<li class="sn-nav-service-mode-couleur"><a href="[(#SELF|parametre_url{sn_mode_couleur,#GET{sn_mode_couleur_inverse}}|parametre_url{var_mode,recalcul})]" title="#GET{sn_mc_legende}" rel="nofollow" class="sn-btn sn-btn-a[ (#GET{ico_mode}|oui)sn-btn-ico]">
+				[(#GET{sn_mode_couleur}|=={lumineux}|oui)[(#GET{ico_mode}|?{<span class="fas fa-cloud-moon"></span>,<:snedition:action_mode_couleur_sombre:>})]]
+				[(#GET{sn_mode_couleur}|=={sombre}|oui)[(#GET{ico_mode}|?{<span class="fas fa-sun"></span>,<:snedition:action_mode_couleur_lumineux:>})]]
+		</a></li>
+	]
+		<li><div class="sn-bloc-rechercher" role="navigation">[(#FORMULAIRE_RECHERCHE)]</div></li>
+	</ul>
+</nav>
+<!-- SN Edition - inclure/nav_service -->

@@ -1,0 +1,34 @@
+[(#CONFIG{sn_generateur_activer}|=={on}|oui)
+<div class="sncolonne-gauche">
+	<h3 class="sncolonne-gauche-titre sn-marge-28"><:snimage:colonne_gauche_titre:></h3>
+	<p class="sncolonne-gauche-explication"><:snimage:colonne_gauche_explication:></p>
+	<div class="ajax">
+    	[(#FORMULAIRE_GENERER_IMAGE{#ENV{sn_affichage_generer_image}})]
+	</div>
+	<div class="ajax">
+    	[(#FORMULAIRE_GENERER_GALERIE{#ENV{sn_affichage_generer_galerie}})]
+	</div>
+	<div class="ajax">
+    	[(#FORMULAIRE_GENERER_LIEN{#ENV{sn_affichage_generer_lien}})]
+	</div>
+	<div class="ajax">
+    	[(#FORMULAIRE_GENERER_BLOC{#ENV{sn_affichage_generer_bloc}})]
+	</div>
+	<div class="ajax">
+    	[(#FORMULAIRE_GENERER_DIAPO{#ENV{sn_affichage_generer_diapo}})]
+	</div>
+	[(#CONFIG{sn_video_activer}|=={on}|oui)<div class="ajax">
+    	[(#FORMULAIRE_GENERER_VIDEO{#ENV{sn_affichage_generer_video}})]
+    </div>]
+	[(#CONFIG{sn_icones_cle}|oui)<div class="ajax">
+    	[(#FORMULAIRE_GENERER_ICONE{#ENV{sn_affichage_generer_icone}})]
+    </div>]
+	[(#CONFIG{sn_geoloc_activer}|=={on}|oui)<div class="ajax">
+    	[(#FORMULAIRE_GENERER_GEOLOC{#ENV{sn_affichage_generer_geoloc}})]
+	</div>]
+	<div class="ajax">
+    	[(#FORMULAIRE_GENERER_INFOBULLE{#ENV{sn_affichage_generer_infobulle}})]
+	</div>
+</div>
+]
+<!-- SN Edition - prive/squelettes/inclure/colonne-sneditable -->

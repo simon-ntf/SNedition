@@ -1,0 +1,32 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_lien','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_lien','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-sn-lien-24.png}"><:snedition:generer_lien_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}' id='formulaire_generer_lien'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+			<fieldset>
+         <legend><:snedition:generer_lien_titre_interne:></legend>
+         [(#SAISIE{'selection', lien_objet, label=<:snedition:generer_lien_objet:>, defaut=#ENV**{lien_objet}, data=#ENV**{liste_objets}})]
+			[(#SAISIE{'input', lien_id_objet, label=<:snedition:generer_lien_id_objet:>, defaut=#ENV**{lien_id_objet}, maxlength=21})]
+         </fieldset><fieldset><legend><:snedition:generer_lien_titre_externe:></legend>
+			[(#SAISIE{'input', lien_url, label=<:snedition:generer_lien_url:>, defaut=#ENV**{lien_url}})]
+         </fieldset><fieldset><legend><:snedition:generer_lien_titre_options:></legend>
+			[(#SAISIE{'input', lien_titre_texte, label=<:snedition:generer_lien_titre_texte:>, defaut=#ENV**{lien_titre_texte}, maxlength=256})]
+			[(#SAISIE{'oui_non', lien_btn, label=<:snedition:generer_lien_btn:>, defaut=#ENV**{lien_btn}})]
+			[(#SAISIE{'input', lien_classe, label=<:snedition:generer_lien_classe:>, defaut=#ENV**{lien_classe}, maxlength=256})]
+			[(#SAISIE{'input', lien_ancre, label=<:snedition:generer_lien_ancre:>, defaut=#ENV**{lien_ancre}, maxlength=128})]
+			</fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snedition:generer_lien_valider:>' /></p>
+    </div></form>
+    ]
+</div>
+<!-- SN Edition - formulaires/generer_lien -->

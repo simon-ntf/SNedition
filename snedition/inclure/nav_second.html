@@ -1,0 +1,6 @@
+<B_navsecond><nav class="nav sn-nav-second sn-section clearfix" id="sn-nav-second" role="navigation"><ul class="sn-brique">
+	<BOUCLE_navsecond(RUBRIQUES) {racine} {tout} {sn_menu==menusec} {par num titre, titre}>
+	<li class="nav-item[ (#EXPOSE)][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]"><a class="sn-btn snbn2" href="#URL_RUBRIQUE">#TITRE</a></li>
+	</BOUCLE_navsecond>
+</ul></nav></B_navsecond>
+<!-- SN Edition - inclure/nav_second -->

@@ -1,0 +1,31 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_icone','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_icone','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-fa-square-font-awesome-stroke.svg}"><:snedition:generer_icone_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}' id='formulaire_generer_icone'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+    	<fieldset>
+    	<p><:snedition:generer_icone_explication:></a></p>
+        <p><a href="https://fontawesome.com/search" target="_blank"><:snedition:generer_icone_lien:></a></p>
+        </fieldset>
+        <fieldset>
+        [(#SAISIE{'input', fa_ref, label=<:snedition:generer_icone_fa_ref:>, defaut=#ENV{fa_ref}, maxlength=128})]
+        [(#SAISIE{'selection', fa_style, label=<:snedition:generer_icone_fa_style:>, defaut=solid, datas=#ENV{liste_fa_styles}, cacher_option_intro=oui})]
+        [(#SAISIE{'selection', fa_taille, label=<:snedition:generer_icone_fa_taille:>, defaut=normal, datas=#ENV{liste_fa_tailles}, cacher_option_intro=oui})]
+        [(#SAISIE{'input', fa_classe, label=<:snedition:generer_icone_fa_classe:>, defaut=#ENV{fa_classe}, maxlength=256})]
+        [(#SAISIE{'oui_non', fa_mode_bouton, label=<:snedition:generer_icone_fa_mode_bouton:>, defaut=#ENV**{fa_mode_bouton}})]
+        </fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snedition:generer_icone_valider:>' /></p>
+    </div></form>
+    ]
+</div>
+<!-- SN Edition - formulaires/generer_icone -->

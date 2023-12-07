@@ -1,0 +1,19 @@
+<BOUCLE_file (DOCUMENTS) {id_document=#ENV{id_document}} {tout}>
+[(#MEDIA|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+][(#MEDIA|=={image}|non)
+	#SET{image,#LOGO_DOCUMENT}
+	[(#SET{fichier,[(#GET{image}|extraire_attribut{src})]})]
+	[(#SET{width,[(#GET{image}|extraire_attribut{width})]})]
+	[(#SET{height,[(#GET{image}|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+]
+[(#SET{ico_mode,#CONFIG{sn_icones_cle}|strlen|>{0}})]
+[(#SET{title,[(#TYPE_DOCUMENT) - [(#TAILLE|taille_en_octets)]]})]
+[(#MEDIA|=={image}|oui) #SET{title,#TITRE|sinon{#GET{title}}]
+[<a href="(#GET{url})"[	class="(#ENV{classe}|concat{' spip_doc_lien sn-doc-lien'})"] title='[(#GET{title}|attribut_html)]'[	(#MEDIA|=={image}|non)type="#MIME_TYPE"]>[(#GET{ico_mode}|oui)<span class="fa-solid fa-download"></span>&nbsp;&nbsp;]#TITRE</a>]
+</BOUCLE_file>
+<!-- SN Edition - modeles/sndoc -->

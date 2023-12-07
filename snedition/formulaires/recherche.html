@@ -1,0 +1,10 @@
+<div class="formulaire_spip formulaire_recherche[ (#ENV{class})]" id="formulaire_recherche">
+<form action="[(#ENV{action})]" method="get">
+	<div class="editer-groupe">
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<input type="[(#HTML5|?{search,text})]" class="search text" size="10" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" placeholder="<:snedition:action_rechercher_texte_saisie:>" title="<:snedition:action_rechercher_texte_saisie:>" />
+	<input type="submit" class="btn submit sn-btn sn-btn-a sn-btn-recherche" value="<:snedition:action_rechercher_texte_validation:>" title="<:snedition:action_rechercher_texte_validation:>" />
+	</div>
+</form>
+</div>

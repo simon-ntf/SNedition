@@ -1,0 +1,36 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_diapo','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_diapo','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-sn-diaporama-24.png}"><:snedition:generer_diapo_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}' id='formulaire_generer_diapo'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+    	<fieldset>
+        [(#SAISIE{'selection', diapo_direction, label=<:snedition:sndiapo_direction_label:>, defaut=#ENV{diapo_direction}, datas=#ENV{liste_directions}, cacher_option_intro=oui})]
+        [(#SAISIE{'selection', diapo_effet, label=<:snedition:sndiapo_effet_label:>, defaut=#ENV{diapo_effet}, datas=#ENV{liste_effets}, cacher_option_intro=oui})]
+        [(#SAISIE{'input', diapo_hauteur, label=<:snedition:sndiapo_hauteur_label:>, defaut=#ENV{diapo_hauteur}, maxlength=9})]
+        [(#SAISIE{'input', diapo_largeur, label=<:snedition:sndiapo_largeur_label:>, defaut=#ENV{diapo_largeur}, maxlength=9})]
+        [(#SAISIE{'input', diapo_vitesse, label=<:snedition:sndiapo_vitesse_label:>, defaut=#ENV{diapo_vitesse}, maxlength=9})]
+        [(#SAISIE{'input', diapo_delai, label=<:snedition:sndiapo_delai_label:>, defaut=#ENV{diapo_delai}, maxlength=9})]
+        [(#SAISIE{'oui_non', diapo_boucler, label=<:snedition:sndiapo_boucler_label:>, defaut=#ENV{diapo_boucler}})]
+        [(#SAISIE{'selection', diapo_pagination, label=<:snedition:sndiapo_pagination_label:>, defaut=#ENV{diapo_pagination}, datas=#ENV{liste_paginations}, cacher_option_intro=oui})]
+        [(#SAISIE{'oui_non', diapo_navigation, label=<:snedition:sndiapo_navigation_label:>, defaut=#ENV{diapo_navigation}})]
+        [(#SAISIE{'oui_non', diapo_scrolleur, label=<:snedition:sndiapo_scrolleur_label:>, defaut=#ENV{diapo_scrolleur}})]
+        [(#SAISIE{'oui_non', diapo_autoflex, label=<:snedition:sndiapo_autoflex_label:>, defaut=#ENV{diapo_autoflex}})]
+        [(#SAISIE{'oui_non', diapo_autopause, label=<:snedition:sndiapo_autopause_label:>, defaut=#ENV{diapo_autopause}})]
+        [(#SAISIE{'oui_non', diapo_parallaxe, label=<:snedition:sndiapo_parallaxe_label:>, defaut=#ENV{diapo_parallaxe}})]
+        [(#SAISIE{'input', diapo_interstice, label=<:snedition:sndiapo_interstice_label:>, defaut=#ENV{diapo_interstice}, maxlength=9})]
+        </fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snedition:generer_bloc_valider:>' /></p>
+    </div></form>
+    ]
+</div>
+<!-- SN Edition - formulaires/generer_diapo -->

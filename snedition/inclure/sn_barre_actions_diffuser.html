@@ -1,0 +1,38 @@
+[(#SET{ico_mode,#CONFIG{sn_icones_cle}|strlen|>{0}})]
+[(#SET{tac,#LANG|sn_tarteaucitron_cookies_decode})]
+[(#SET{partage_config,#CONFIG{sn_partage_services}|sn_partage_services_datas})]
+<nav class="sn-nav sn-nav-actions sn-nav-partager"><ul>
+<BOUCLE_services(DATA){source array, #GET{partage_config}}>
+	[(#VALEUR|sn_trouver{actif}|=={on}|oui)
+		[(#REM) Pour activer les partages réseaux sociaux décommenter et modifier les lignes ci-dessous
+		[(#CLE|=={linkedin}|oui)[(#GET{tac}|sn_trouver{linkedin}|=={true}|oui)
+		<li><span class="tacLinkedin"></span><a target="_blank" title="[(#VALEUR|sn_trouver{titre})]" class="sn-btn sn-btn-a sn-js-action[ (#GET{ico_mode}|oui)sn-btn-ico]" name="#CLE"[ href="https://www.linkedin.com/shareArticle?mini=true&url=(#SELF|url_absolue)/&title=#ENV{page_titre}"]>
+			[(#GET{ico_mode}|?{<span class="[(#VALEUR|sn_trouver{icone_classe,''})]"></span>,#VALEUR|sn_trouver{titre}})]
+		</a></li>
+		]][(#CLE|=={twitter}|oui)[(#GET{tac}|sn_trouver{twitter}|=={true}|oui)
+		<li><span class="tacTwitter"></span><a target="_blank" title="[(#VALEUR|sn_trouver{titre})]" class="sn-btn sn-btn-a sn-js-action[ (#GET{ico_mode}|oui)sn-btn-ico]" name="#CLE"[ href="https://twitter.com/intent/tweet?url=(#SELF|url_absolue)&text=[via @(#ENV{cle_twitter})] - #URL_SITE_SPIP"][ data-via="(#ENV{cle_twitter})"] data-dnt="true">
+			[(#GET{ico_mode}|?{<span class="[(#VALEUR|sn_trouver{icone_classe,''})]"></span>,#VALEUR|sn_trouver{titre}})]
+		</a></li>
+		]][(#CLE|=={facebook}|oui)[(#GET{tac}|sn_trouver{facebook}|=={true}|oui)
+		<li><span class="tacFacebook"></span><a target="_blank" title="[(#VALEUR|sn_trouver{titre})]" class="sn-btn sn-btn-a sn-js-action[ (#GET{ico_mode}|oui)sn-btn-ico]" name="#CLE"[ href="https://www.facebook.com/sharer/sharer.php?u=(#SELF|url_absolue)"]>
+			[(#GET{ico_mode}|?{<span class="[(#VALEUR|sn_trouver{icone_classe,''})]"></span>,#VALEUR|sn_trouver{titre}})]
+		</a></li>
+		]][(#CLE|=={pinterest}|oui)[(#GET{tac}|sn_trouver{pinterest}|=={true}|oui)
+		<li><span class="tacPinterest"></span><a target="_blank" title="[(#VALEUR|sn_trouver{titre})]" class="sn-btn sn-btn-a sn-js-action[ (#GET{ico_mode}|oui)sn-btn-ico]" name="#CLE"[ href="https://pinterest.com/pin/create/button/?url=(#SELF|url_absolue)[&media=(#ENV{page_illustration})][&description=(#ENV{page_titre})]"]>
+			[(#GET{ico_mode}|?{<span class="[(#VALEUR|sn_trouver{icone_classe,''})]"></span>,#VALEUR|sn_trouver{titre}})]
+		</a></li>
+		]]
+		]
+		[(#CLE|=={envoyer}|oui)
+		<li><a title="[(#VALEUR|sn_trouver{titre})]" class="sn-btn sn-btn-a sn-js-action[ (#GET{ico_mode}|oui)sn-btn-ico]" name="#CLE" [href="mailto:?subject=<:snedition:action_partager_envoyer_mail_objet:>&body=<:snedition:action_partager_envoyer_mail_texte:>(#SELF|url_absolue)"]>
+			[(#GET{ico_mode}|?{<span class="[(#VALEUR|sn_trouver{icone_classe,''})]"></span>,#VALEUR|sn_trouver{titre}})]
+		</a></li>
+		][(#CLE|=={imprimer}|oui)
+		<li><a title="[(#VALEUR|sn_trouver{titre})]" class="sn-btn sn-btn-a sn-js-action[ (#GET{ico_mode}|oui)sn-btn-ico]" name="#CLE" href="">
+			[(#GET{ico_mode}|?{<span class="[(#VALEUR|sn_trouver{icone_classe,''})]"></span>,#VALEUR|sn_trouver{titre}})]
+		</a></li>
+		]
+	]
+</BOUCLE_services>
+</ul></nav>
+<!-- SN Edition - inclure/sn_barre_actions_diffuser -->

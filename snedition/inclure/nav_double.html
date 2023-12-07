@@ -1,0 +1,18 @@
+<B_nav>
+<nav class="nav sn-nav sn-nav-double sn-section clearfix" id="nav" role="navigation">
+	<ul class="sn-brique">
+		<BOUCLE_nav(RUBRIQUES) {racine} {tout} {sn_menu==menuppl} {par num titre, titre}>
+		<li class="nav-item[ (#EXPOSE)][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+			<a class="sn-btn" href="#URL_RUBRIQUE"[ name="(#COMPTEUR_BOUCLE)"]>#TITRE</a>
+			<B_nav_sous_2><ul class="sn-nav-double-sous-menu"><BOUCLE_nav_sous_2(RUBRIQUES) {tout} {id_parent=#ID_RUBRIQUE} {par num titre, titre}>
+                <li>
+                    <a class="sn-btn snbn1" href="#URL_RUBRIQUE">#TITRE</a>
+                </li>
+            </BOUCLE_nav_sous_2></ul></B_nav_sous_2>
+		</li>
+		</BOUCLE_nav>
+	</ul>
+   <B_nav_sous>
+</nav>
+</B_nav>
+<!-- SN Edition - inclure/nav_double -->

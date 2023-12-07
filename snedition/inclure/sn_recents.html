@@ -1,0 +1,63 @@
+[(#SET{flux_affichage, #ENV{flux_affichage}|sinon{#CONFIG{sn_flux_articles_affichage}}|sinon{liste}})]
+[(#SET{limite, #ENV{limite}|sinon{5}})]
+[(#SET{idref, recents-})]
+[(#SET{idref, #ENV{opt/idref}|sinon{#GET{idref}|sn_hasardiser}})]
+[(#SET{aff_titre, #ENV{opt/aff_titre}|sinon{oui}})]
+[(#SET{aff_infos, #ENV{opt/aff_infos}|sinon{oui}})]
+[(#SET{aff_chapo, #ENV{opt/aff_chapo}|sinon{oui}})]
+[(#SET{aff_etiquette, #ENV{opt/aff_etiquette}|sinon{oui}})]
+[(#SET{aff_image, #ENV{opt/aff_image}|sinon{oui}})]
+[(#SET{aff_lien_suite, #ENV{opt/aff_lien_suite}|sinon{oui}})]
+[(#SET{aff_logo, #ENV{opt/aff_logo}|sinon{non}})]
+[(#REM)
+	Parametres :
+	- age : limiter aux articles publies depuis N jours / defaut 365
+	- limite : nombre max articles affiches / defaut 5
+	- exclure : liste des identifiants articles a exclure / defaut non
+	- flux affichage : style  affichage (liste,grille,diapo) / defaut selon config, sinon liste
+	- pagination : paginer a partir de (ou pas si 0) / defaut 10
+	- opt : tableau des options
+		- bloc_titre : retitrer le bloc / defaut articles_recents
+		- aff_titre : afficher le titre / defaut oui
+		- aff_infos : afficher les infos (date et auteurs) / defaut oui
+		- aff_chapo : afficher le chapo / defaut oui
+		- aff_etiquette : afficher etiquette / defaut oui
+		- aff_image : afficher image / defaut oui
+		- aff_logo : afficher le logo SPIP / defaut non
+		- diapo_anim : style animation / defaut degauche-lent
+		- diapo_defil : temps defilement auto en secondes ou (vide ou 0) pas / defaut 6
+		- diapo_fleches : fleches ou (vide ou non) pas de fleches / defaut non
+		- diapo_boutons : style boutons ou (vide) pas de boutons / defaut points
+		- idref : identifiant DOM du bloc / defaut sn-recents-N(hasard)
+		- classe : classe CSS du bloc
+		- niveau_de_titre_html : h2,h3,h4... / defaut h2
+		- pos_image
+]
+<B_articles>
+<div class="sn-bloc sn-bloc-flux sn-bloc-flux-recents[ sn-bloc-flux-(#GET{flux_affichage})]">
+[(#GET{flux_affichage}|=={diapo}|oui)[(#TOTAL_BOUCLE|>{1}|non)#SET{flux_affichage,liste}]]
+	[(#ENV{opt/niveau_de_titre_html}|=={strong}|oui)<p><strong>[(#ENV{opt/bloc_titre}|sinon{<:articles_recents:>})]</strong></p>]
+	[(#ENV{opt/niveau_de_titre_html}|=={strong}|non)
+	[<(#ENV{opt/niveau_de_titre_html}|sinon{h2})>][(#ENV{opt/bloc_titre}|sinon{<:articles_recents:>})][</(#ENV{opt/niveau_de_titre_html}|sinon{h2})>]
+	]
+	[(#GET{flux_affichage}|=={diapo}|non)[(#ENV{pagination}|>{0}|oui)#ANCRE_PAGINATION]]
+	<ul [id="(#GET{idref})"] class="sn-flux[ sn-flux-(#GET{flux_affichage})][ (#GET{flux_affichage}|=={diapo}|oui)sn-diapo][ (#ENV{opt/classe})]"[ (#GET{flux_affichage}|=={diapo}|oui)data-slide_animation="[(#ENV{opt/diapo_anim}|sinon{degauche-lent})]" data-defilement="[(#ENV{opt/diapo_defil}|sinon{6})]" data-fleches="[(#ENV{opt/diapo_fleches}|sinon{non})]" data-boutons="[(#ENV{opt/diapo_boutons}|sinon{points})]"]>
+	<BOUCLE_articles(ARTICLES) {id_rubrique?} {id_auteur?} {id_mot?} {id_article ?!IN #ENV{exclure}} {age ?< #ENV{age}} {!par date} {0,#GET{limite}} {pagination}>
+		<li>
+			[(#GET{aff_image}|=={oui}|oui)[(#ID_DOCUMENT|oui)<div class="sn-flux-vignette">
+				#MODELE{snvmg,id_document,snv_format=car,lien=#URL_ARTICLE,lien_class=sn-img-lien,env}
+			</div>]]
+			<div class="sn-flux-contenu">
+			<BOUCLE_rubriques(RUBRIQUES){id_rubrique}{sn_menu!=3}>[(#GET{aff_etiquette}|=={oui}|oui)<a class="sn-recent-label-rubrique" href="#URL_RUBRIQUE">#TITRE</a>]</BOUCLE_rubriques>
+			[(#GET{aff_infos}|=={oui}|oui)<p class="sn-recent-date"><small><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small></p>]
+			[(#GET{aff_titre}|=={oui}|oui)<p class="sn-recent-titre"><strong><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></p></strong>]
+			[(#GET{aff_chapo}|=={oui}|oui)[<p class="sn-recent-chapo">(#CHAPO|textebrut|couper{160})</p>]]
+			[(#GET{aff_lien_suite}|=={oui}|oui)<p class="sn-recent-lien"><a class="sn-btn sn-btn-a" href="#URL_ARTICLE"><:lire_la_suite:></a></p>]
+			</div>
+		</li>
+		</BOUCLE_articles>
+	</ul>
+	[(#GET{flux_affichage}|=={diapo}|non)[(#ENV{pagination}|>{0}|oui)[<nav role="navigation" class="p pagination">(#PAGINATION{precedent_suivant})</nav>]]]
+</div>
+<!--#articles_recents-->
+</B_articles>

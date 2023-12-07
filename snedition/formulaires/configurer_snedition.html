@@ -1,0 +1,74 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip formulaire_configurer'>
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form method='post' action='#ENV{action}' id='formulaire_configurer_snreset'><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+    	[(#PLUGIN{snsoustheme}|non)<div><fieldset><div><h3><:snedition:config_section_avertissement:></h3><p class="sn-prive-txt-mini sn-prive-avertissement"><:snedition:config_avertissement_snsuite:></p></div></fieldset></div>]
+    	<fieldset><div><h3><:snedition:config_section_legal:></h3>
+        	[(#SAISIE{'input', sn_responsable_legal, label=<:snedition:config_responsable_legal:>, explication=<:snedition:config_responsable_legal_explication:>, defaut=#ENV**{sn_responsable_legal}, maxlength=64,obligatoire=oui})]
+            [(#SAISIE{'oui_non', sn_page_legal_activer, label=<:snedition:config_page_legal_activer:>, explication=<:snedition:config_page_legal_activer_explication:>, defaut=#ENV**{sn_page_legal_activer}})]
+            [(#SAISIE{'oui_non', sn_tarteaucitron_activer, label=<:snedition:config_tarteaucitron_activer:>, explication=<:snedition:config_tarteaucitron_activer_explication:>, defaut=#ENV**{sn_tarteaucitron_activer}})]
+        </div></fieldset><fieldset><div><h3><:snedition:config_section_contact:></h3>
+            [(#SAISIE{'oui_non', sn_contact_activer, label=<:snedition:config_contact_activer:>, explication=<:snedition:config_contact_activer_explication:>, defaut=#ENV**{sn_contact_activer}})]
+            [(#SAISIE{'auteurs', sn_contact_auteur, label=<:snedition:config_contact_auteur:>, explication=<:snedition:config_contact_auteur_explication:>, defaut=#ENV**{sn_contact_auteur}, class=sicontact})]
+        </div></fieldset><fieldset><div><h3><:snedition:config_section_nav:></h3>
+            [(#SAISIE{'selection', sn_menu_ppl, label=<:snedition:config_menu_ppl:>, defaut=#ENV**{sn_menu_ppl}, datas=#ENV{liste_menu_types}, cacher_option_intro=oui})]
+            [(#SAISIE{'oui_non', sn_menu_mega_actu, label=<:snedition:config_menu_mega_actu:>, defaut=#ENV**{sn_menu_mega_actu}, class=simenumega})]
+            [(#SAISIE{'oui_non', sn_menu_sec_activer, label=<:snedition:config_menu_sec_activer:>, defaut=#ENV**{sn_menu_sec_activer}})]
+            [(#SAISIE{'oui_non', sn_recherche_images, label=<:snedition:config_recherche_images:>, defaut=#ENV**{sn_recherche_images}})]
+            [(#SAISIE{'oui_non', sn_liens_forcer_onglet_activer, label=<:snedition:config_forcer_onglet_activer:>, explication=<:snedition:config_forcer_onglet_activer_explication:>, defaut=#ENV**{sn_liens_forcer_onglet_activer}})]
+        </div></fieldset><fieldset><div><h3><:snedition:config_section_actus:></h3>
+            [(#SAISIE{'oui_non', sn_page_actus_activer, label=<:snedition:config_page_actus_activer:>, explication=<:snedition:config_page_actus_activer_explication:>, defaut=#ENV**{sn_page_actus_activer}})]
+            [(#SAISIE{'input', sn_page_actus_themes_groupe, label=<:snedition:config_page_actus_themes_groupe:>, explication=<:snedition:config_page_actus_themes_groupe_explication:>, defaut=#ENV**{sn_page_actus_themes_groupe}, maxlength=3, class=siactus})]
+            [(#SAISIE{'selection', sn_page_actus_affichage, label=<:snedition:config_page_actus_affichage:>, defaut=#ENV**{page_actus_affichage}, datas=#ENV{liste_page_actus_affichages}, cacher_option_intro=oui, class=siactus})]
+            [(#SAISIE{'selection', sn_flux_articles_affichage, label=<:snedition:config_flux_articles_affichage:>, defaut=#ENV**{flux_articles_affichage}, datas=#ENV{liste_flux_articles_affichages}, cacher_option_intro=oui})]
+		</div></fieldset><fieldset><div><h3><:snedition:config_section_evts:></h3>
+            [(#SAISIE{'oui_non', sn_evt_activer, label=<:snedition:config_evt_activer:>, explication=<:snedition:config_evt_activer_explication:>, defaut=#ENV**{sn_evt_activer}})]
+				[(#SAISIE{'input', sn_evt_themes_groupe, label=<:snedition:config_evt_themes_groupe:>, explication=<:snedition:config_evt_themes_groupe_explication:>, defaut=#ENV**{sn_evt_themes_groupe}, maxlength=3, class=sievts})]
+            [(#SAISIE{'oui_non', sn_article_coord_activer, label=<:snedition:config_article_coord_activer:>, defaut=#ENV**{sn_article_coord_activer}, class=sievts})]
+        </div></fieldset><fieldset><div><h3><:snedition:config_section_partage:></h3>
+        	[(#SAISIE{'oui_non', sn_partage_activer, label=<:snedition:config_partage_activer:>, explication=<:snedition:config_partage_activer_explication:>, defaut=#ENV**{sn_partage_activer}})]
+        	<BOUCLE_partage_services(DATA){source array, #ENV{sn_partage_services_datas}}>
+        		[(#SAISIE{'case', sn_partage_services_#CLE, label=#VALEUR|sn_trouver{titre}, defaut=#VALEUR|sn_trouver{defaut,''}, class=sipartage})]
+        	</BOUCLE_partage_services>
+        </div></fieldset><fieldset><div><h3><:snedition:config_section_prive:></h3>
+            [(#SAISIE{'oui_non', sn_generateur_activer, label=<:snedition:config_generateur_activer:>, explication=<:snedition:config_generateur_activer_explication:>, defaut=#ENV**{sn_generateur_activer}})]
+        </div></fieldset><fieldset><div><h3><:snedition:config_section_lib:></h3>
+            [(#SAISIE{'input', sn_icones_cle, label=<:snedition:config_icones_cle:>, explication=<:snedition:config_icones_cle_explication:>, defaut=#ENV**{sn_icones_cle}, maxlength=64})]
+            [(#SAISIE{'oui_non', sn_geoloc_activer, label=<:snedition:config_geoloc_activer:>, defaut=#ENV**{sn_geoloc_activer}})]
+            [(#SAISIE{'oui_non', sn_video_activer, label=<:snedition:config_video_activer:>, defaut=#ENV**{sn_video_activer}})]
+        </div></fieldset></div>
+    </div>
+    <!--extra-->
+    <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+    </div></form>
+</div>
+<script type="text/javascript">
+	if (window.jQuery){	jQuery(document).ready(function(){
+		var partage_actif = "#ENV**{sn_partage_activer}"; if(partage_actif === 'on'){} else{ $('.sipartage input').attr('disabled','true'); }
+		$('#champ_sn_partage_activer_oui').on('change',function (e) { $('.sipartage input').removeAttr('disabled'); });
+		$('#champ_sn_partage_activer_non').on('change',function (e) { $('.sipartage input').attr('disabled','true'); });
+
+		var contact_actif = "#ENV**{sn_contact_activer}"; if(contact_actif === 'on'){} else{ $('.sicontact').attr('disabled','true'); }
+		$('#champ_sn_contact_activer_oui').on('change',function (e) { $('.sicontact').removeAttr('disabled'); });
+		$('#champ_sn_contact_activer_non').on('change',function (e) { $('.sicontact').attr('disabled','true'); });
+
+		var actus_actif = "#ENV**{sn_page_actus_activer}"; if(actus_actif === 'on'){} else{ $('.siactus').attr('disabled','true'); }
+		$('#champ_sn_page_actus_activer_oui').on('change',function (e) { $('.siactus').removeAttr('disabled'); });
+		$('#champ_sn_page_actus_activer_non').on('change',function (e) { $('.siactus').attr('disabled','true'); });
+
+		var evts_actif = "#ENV**{sn_evt_activer}"; if(evts_actif === 'on'){} else{ $('.sievts').attr('disabled','true'); $('.sievts input').attr('disabled','true'); }
+		$('#champ_sn_evt_activer_oui').on('change',function (e) { $('.sievts').removeAttr('disabled'); $('.sievts input').removeAttr('disabled'); });
+		$('#champ_sn_evt_activer_non').on('change',function (e) { $('.sievts').attr('disabled','true'); $('.sievts input').attr('disabled','true'); });
+
+		$('#champ_sn_menu_ppl').on('change',function (e) { snEditMenuPplChanger(); });
+		snEditMenuPplChanger();
+		function snEditMenuPplChanger(){
+			if($('#champ_sn_menu_ppl').val() == 'mega'){ $('.simenumega input').removeAttr('disabled'); }
+			else{ $('.simenumega input').attr('disabled','true'); }
+		}
+	;}); }
+</script>
+<!-- SN Edition - formulaires/configurer_snedition -->

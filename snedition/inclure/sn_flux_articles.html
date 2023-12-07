@@ -1,0 +1,44 @@
+[(#ENV{fsecteurs}|oui|?{#SET{fsecteurs,#ENV{fsecteurs}|sn_filtrage_transtyper},#SET{fsecteurs,#LANG|sn_lister_id_secteurs1}})]
+[(#SET{flux_affichage, #ENV{flux_affichage}|sinon{#CONFIG{sn_page_actus_affichage}}|sinon{liste}})]
+#SET{classe_css_bouton,sn-btn-fitre-inactif}
+[(#CONFIG{sn_page_actus_affichage}|=={grille}|oui)#SET{grl,oui}]
+<div class="sn-bloc sn-bloc-flux sn-bloc-flux-filtrer">
+<B_filtresecteur>
+<small><span class="sn-nav-titre"><:snedition:action_filtrer_secteur_titre:></span></small>
+<nav class="sn-nav sn-nav-actions sn-nav-filtrer">
+<BOUCLE_filtresecteur(RUBRIQUES) {racine} {tout} {sn_menu==menuppl} {par num titre, titre}>
+	[(#SET{classe_css_bouton,#ID_RUBRIQUE|in_array{#GET{fsecteurs}}|?{sn-btn-o sn-btn-o-on,sn-btn-o}})]
+	[(#GET{fsecteurs}|count|=={#TOTAL_BOUCLE}|oui) #SET{classe_css_bouton,sn-btn-o}]
+	<a class="ajax sn-btn[ (#GET{classe_css_bouton})][ (#GET{ico_mode}|oui)sn-btn-ico]" href="[(#SELF|parametre_url{fsecteurs,i#ID_RUBRIQUE})]">
+		[(#CONFIG{sn_icones_cle}|strlen|>{0}|oui)<span class="fa-solid fa-folder"></span>] #TITRE
+	</a>
+</BOUCLE_filtresecteur>
+[(#GET{fsecteurs}|count|=={#TOTAL_BOUCLE}|non)
+	<a class="ajax sn-btn sn-btn-o[ (#GET{ico_mode}|oui)sn-btn-ico]" href="[(#SELF|parametre_url{fsecteurs,#LANG|sn_lister_id_secteurs1|sn_filtrage_transtyper_array})]">
+		[(#CONFIG{sn_icones_cle}|strlen|>{0}|oui|?{<span class="fa-solid fa-delete-left"></span>,<:snedition:action_filtrer_supprimer_filtres:>})]
+	</a>
+]
+</nav></B_filtresecteur>
+</div>
+<B_articles>
+<div class="sn-bloc sn-bloc-flux sn-bloc-flux-articles[ sn-bloc-flux-(#GET{flux_affichage})]">
+	#ANCRE_PAGINATION
+	<nav class="sn-nav sn-nav-articles sn-flux[ sn-flux-(#GET{flux_affichage})]">
+		<BOUCLE_articles(ARTICLES) {!par date} {pagination} {id_rubrique in #GET{fsecteurs}}>
+		<div dir="#LANG_DIR" class="hentry clearfix">
+			[(#ID_DOCUMENT|oui)<div class="sn-flux-vignette">
+				#MODELE{snvmg,id_document,snv_format=car,lien=#URL_ARTICLE,lien_class=sn-img-lien,env}
+			</div>]
+			<div class="sn-flux-contenu">
+			<BOUCLE_rubriques(RUBRIQUES){id_rubrique}{sn_menu!=3}><small><a class="sn-recent-label-rubrique" href="#URL_RUBRIQUE">#TITRE</a></small></BOUCLE_rubriques>
+			<h3 class="h2 entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+			<small><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+			[<div class="#EDIT{intro} introduction entry-content">(#CHAPO|textebrut|couper{160})</div>]
+			</div>
+		</div>
+		</BOUCLE_articles>
+	</nav>
+	[<nav role="navigation" class="p pagination">(#PAGINATION{precedent_suivant})</nav>]
+</div><!--#articles_recents-->
+</B_articles>
+<!-- SN Edition - inclure/sn_flux_articles -->

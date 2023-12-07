@@ -1,0 +1,19 @@
+[<section class="sn-bloc[ (#ENV{style})][ (#ENV{classe})]">
+[(#REM)
+
+	Parametres :
+	- accordeon bloc accordeon
+	- classe classe CSS en complement
+	- colonnes nombre de colonnes
+	- contenu HTML contenu
+	- niveau niveau du titre
+	- plie si accordeon plie
+	- style classe CSS utilisateur
+	- titre texte du titre
+
+]
+[(#ENV{accordeon}|oui)<a class="sn-acc sn-btn sn-ubtn"[ (#ENV{plie}|oui)data-plie="oui"] href='#'>]
+[<h[(#ENV{niveau}|sinon{2})]>(#ENV{titre})</h[(#ENV{niveau}|sinon{2})]>]
+[(#ENV{accordeon}|oui)</a>]
+<div[ class="sn-col(#ENV{colonnes})"]>(#ENV{contenu}|supprimer_tags|filtrer_entites|trim)</div></section>]
+<!-- SN Edition - modeles/snbloc -->
