@@ -59,7 +59,7 @@
 	--swiper-scrollbar-right: -4px;
 }
 .sn-swiper{ position: relative; max-width: 960px; margin: auto; }
-.sn-swiper.sn-swiper-contraint.swiper-horizontal .swiper-wrapper{ margin-bottom 54px;}
+.sn-swiper.sn-swiper-contraint.swiper-horizontal .swiper-wrapper{ margin-bottom: 54px; }
 .sn-swiper.sn-swiper-contraint.swiper-vertical .swiper-wrapper{ max-width: 92%; margin-left: 4%; margin-right: 4%; }
 .sn-swiper .swiper-slide{ text-align: center; }
 .sn-swiper .swiper-slide img{ position: relative; display: inline; }
@@ -68,7 +68,7 @@
 .sn-swiper-pagination-bullet-pointnum:hover,
 .swiper-pagination-bullet-active { background: #c41558; }
 
-.sn-swiper .sn-swiper-sns-pres-slide-img{ display:table-cell; max-width: auto; max-height: auto; }
+.sn-swiper .sn-swiper-sns-pres-slide-img{ display:table-cell; }
 
 /* 3 SN Styles predefinis */
 
@@ -135,7 +135,7 @@
 /* SN Tableaux */
 
 .sn-tbl{ width: 100%; }
-.sn-tbl th, .sn-tbl td{ padding: 8px 1% 8px 1%; margin 16px 2% 16px 2%; }
+.sn-tbl th, .sn-tbl td{ padding: 8px 1% 8px 1%; margin: 16px 2% 16px 2%; }
 .sn-tbl tr td{ background-color: rgba(199,199,199,0.1); border: 2px solid #fff; border: 2px solid rgba(255,255,255,0.5); }
 .sn-tbl tr:hover td{ background-color: rgba(239,139,139,0.1); border: 2px solid #fff; }
 .sn-tbl tr th{ font-weight: bold; }
