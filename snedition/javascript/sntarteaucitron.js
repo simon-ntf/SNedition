@@ -32,11 +32,11 @@ tarteaucitron.init({
 "readmoreLink": "", /* Change the default readmore link */
 "mandatory": true, /* Show a message about mandatory cookies */
  });
-
+/*
 if(config_tarteaucitron_facebook == 'on'){ (tarteaucitron.job = tarteaucitron.job || []).push('facebook'); }
 if(config_tarteaucitron_linkedin == 'on'){ (tarteaucitron.job = tarteaucitron.job || []).push('linkedin'); }
 if(config_tarteaucitron_pinterest == 'on'){ (tarteaucitron.job = tarteaucitron.job || []).push('pinterest'); }
 if(config_tarteaucitron_twitter == 'on'){ (tarteaucitron.job = tarteaucitron.job || []).push('twitter'); }
 if(config_tarteaucitron_youtube == 'on'){ (tarteaucitron.job = tarteaucitron.job || []).push('youtube'); }
-
+*/
 /*** SN Suite|sntarteaucitron.js : end ***/
